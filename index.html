@@ -12,18 +12,22 @@
   <div class="container" ng-controller="TodoController as todoCtrl">
   <h1>Todo List</h1>
   <form name="myForm" ng-submit="myForm.$valid && todoCtrl.addNewTask()" novalidate>
-    <label>Name:</label><input type ="text" ng-model="todoCtrl.newTask.name" required />
-    <label>Description:</label><input type ="text" ng-model="todoCtrl.newTask.desc" required />
-    <label>Due Date:</label><input type ="date" ng-model="todoCtrl.newTask.due" required />
-    <label>Priority:</label><input type="priority" ng-model="todoCtrl.newTask.priority" required />
-    <input type="submit" value="Add Task"></button>
-    <select name="sort">
-    <option value="" disabled selected>Sort by</option>
-    <option name="priority" ng-model="todoCtrl.sortTask.priority">Priority</option>
-    <option name="task" ng-model="todoCtrl.sortTask.task">Task</option>
-    <option name="date" ng-model="todoCtrl.sortTask.date">Date</option>
+    <label>Name:</label>
+    <input type ="text" ng-model="todoCtrl.newTask.name" required />
+    <label>Description:</label>
+    <input type ="text" ng-model="todoCtrl.newTask.desc" required />
+    <label>Due Date:</label>
+    <input type ="date" ng-model="todoCtrl.newTask.due" required />
+    <label>Priority:</label><br />
+    <select ng-model="todoCtrl.newTask.priority">
+    <option value="{{val}}" ng-repeat="(val, text) in todoCtrl.priorityOptions">
+      {{text}}
+    </option>
     </select>
+    <input type="submit" value="Add Task" ng-show="myForm.$valid" />
+
     <a href="#">Sort</a>
+
   </form>
   <table>
     <thead>
