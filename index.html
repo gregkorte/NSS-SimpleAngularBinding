@@ -1,17 +1,69 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" ng-app="todoApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Title</title>
+  <title>Todo List</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
 
-  <div class="container">
-    <h1>My Site Title</h1>
+  <div class="container" ng-controller="TodoController as todoCtrl">
+  <h1>Todo List</h1>
+  <form name="myForm" ng-submit="myForm.$valid && todoCtrl.addNewTask()" novalidate>
+    <label>Name:</label><input type ="text" ng-model="todoCtrl.newTask.name" required />
+    <label>Description:</label><input type ="text" ng-model="todoCtrl.newTask.desc" required />
+    <label>Due Date:</label><input type ="date" ng-model="todoCtrl.newTask.due" required />
+    <label>Priority:</label><input type="priority" ng-model="todoCtrl.newTask.priority" required />
+    <input type="submit" value="Add Task"></button>
+    <select name="sort">
+    <option value="" disabled selected>Sort by</option>
+    <option name="priority" ng-model="todoCtrl.sortTask.priority">Priority</option>
+    <option name="task" ng-model="todoCtrl.sortTask.task">Task</option>
+    <option name="date" ng-model="todoCtrl.sortTask.date">Date</option>
+    </select>
+    <a href="#">Sort</a>
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>Task Priority</th>
+        <th>Task Name</th>
+        <th>Task Description</th>
+        <th>Task Due Date</th>
+        <th>Remove Task</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="task in todoCtrl.tasks">
+      <td>{{task.priority}}</td>
+      <td>{{task.name}}</td>
+      <td>{{task.desc}}</td>
+      <td>{{task.due | date:'date'}}</td>
+      <td><button ng-click="todoCtrl.removeTask(task)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li ng-repeat=""></li>
+  </ul>
   </div>
 
+  <script src="bower_components/angular/angular.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
+
+
+    <!-- <h1>My Name is {{smpctrl.name}}</h1>
+    Name: <input type="text" ng-model="smpctrl.name" /> {{smpctrl.name}}
+
+    <h2>My Friends</h2>
+    New Friend: <input type="text" ng-model="smpctrl.newFriend" />
+    <button ng-click="smpctrl.friends.push(smpctrl.newFriend)">Add</button><br />
+    Search: <input type="text" ng-model="smpctrl.friendSearchQuery" />
+    <a href="#" ng-click="smpctrl.friendReverse=!smpctrl.friendReverse">Sort</a>
+    <ul>
+      <li ng-repeat="friend in smpctrl.friends | orderBy:'':smpctrl.friendReverse | filter:smpctrl.friendSearchQuery ">{{friend | uppercase}}</li>
+    </ul> -->
