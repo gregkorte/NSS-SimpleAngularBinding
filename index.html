@@ -5,66 +5,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Todo List</title>
-  <!--<link rel="stylesheet" type="text/css" href="css/main.css" />-->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
-
   <div class="container" ng-controller="TodoController as todoCtrl">
   <h1>Todo List</h1>
-  <form name="myForm" ng-submit="myForm.$valid && todoCtrl.addNewTask()" novalidate>
-    <div class="form-group">
-      <label class="control-label">Name:</label>
-      <input class="form-control" type ="text" ng-model="todoCtrl.newTask.name" required />
-    </div>
-    <div class="form-group">
-      <label class="control-label">Description:</label>
-      <input class="form-control" type ="text" ng-model="todoCtrl.newTask.desc" required />
-    </div>
-    <div class="form-group">
-      <label class="control-label">Due Date:</label>
-      <input class="form-control" type ="date" ng-model="todoCtrl.newTask.due" required />
-    </div>
-    <div class="form-group">
-      <label class="control-label">Priority:</label><br />
-      <select ng-model="todoCtrl.newTask.priority">
-      <option value="{{val}}" ng-repeat="(val, text) in todoCtrl.priorityOptions">
-        {{text}}
-      </option>
-      </select>
-    </div>
-    <input type="submit" value="Add Task" ng-show="myForm.$valid" />
-
-    <a href="#">Sort</a>
-
-  </form>
-  <table>
-    <thead>
-      <tr>
-        <th>Task Priority</th>
-        <th>Task Name</th>
-        <th>Task Description</th>
-        <th>Task Due Date</th>
-        <th>Remove Task</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="task in todoCtrl.tasks">
-      <td>{{task.priority}}</td>
-      <td>{{task.name}}</td>
-      <td>{{task.desc}}</td>
-      <td>{{task.due | date:'date'}}</td>
-      <td><button ng-click="todoCtrl.removeTask(task)">Delete</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <ul>
-    <li ng-repeat=""></li>
-  </ul>
+  <div ng-include="'views/form.html'"></div>
+  <div ng-include="'views/table.html'"></div>
   </div>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
